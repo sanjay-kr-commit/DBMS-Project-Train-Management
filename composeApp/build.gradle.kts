@@ -1,10 +1,17 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.compose.reload.ComposeHotRun
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    id("app.cash.sqldelight") version "2.0.2"
+    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.composeHotReload)
+}
+
+composeCompiler {
+    featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
 }
 
 kotlin {
@@ -16,7 +23,7 @@ kotlin {
         val desktopMain by getting
         
         commonMain.dependencies {
-            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
+            implementation(libs.sqldelight)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -27,7 +34,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
         }
         desktopMain.dependencies {
-            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
+            implementation(libs.sqldelight)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
         }
@@ -51,4 +58,8 @@ sqldelight {
             packageName.set("dbms.project")
         }
     }
+}
+
+tasks.register<ComposeHotRun>("runHot") {
+    mainClass.set("dbms.project.MainKt")
 }

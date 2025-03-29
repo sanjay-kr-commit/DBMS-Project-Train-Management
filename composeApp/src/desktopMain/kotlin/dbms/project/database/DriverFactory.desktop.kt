@@ -14,7 +14,9 @@ actual class DriverFactory {
         val driver: SqlDriver = if ( inMemory ) JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY) else JdbcSqliteDriver(
             "$sqlDriver$path$databaseName"
         )
-        TrainDatabase.Schema.create(driver)
+        try {
+            TrainDatabase.Schema.create(driver)
+        } catch (_: Exception) {}
         return driver
     }
 }

@@ -1,9 +1,12 @@
 package dbms.project
 
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import dbms.project.database.DriverFactory
 import dbms.project.navigation.NavigationController
+import org.jetbrains.compose.reload.DevelopmentEntryPoint
 
 fun main() {
 
@@ -24,9 +27,11 @@ fun main() {
             onCloseRequest = ::exitApplication,
             title = "Train Management",
         ) {
-            Navigator(
-                navigationController = navigationController
-            )
+            DevelopmentEntryPoint {
+                Navigator(
+                    navigationController = navigationController
+                )
+            }
         }
     }
 }
