@@ -1,0 +1,20 @@
+-- 6. PAX_info Table
+CREATE TABLE PAX_info (
+    SRL_no INTEGER PRIMARY KEY, -- SQLite uses INTEGER PRIMARY KEY AUTOINCREMENT for auto-increment
+    PAX_name TEXT,
+    PAX_age INTEGER,
+    PAX_sex TEXT,
+    Seat_no TEXT,
+    Login_id TEXT,
+    FOREIGN KEY (Login_id) REFERENCES Login_credential(Login_id)
+);
+
+insert:
+INSERT INTO PAX_info (PAX_name, PAX_age, PAX_sex, Seat_no, Login_id)
+VALUES (?,?,?,?,?);
+
+delete:
+DELETE FROM PAX_info WHERE Login_id = :login_id;
+
+read:
+SELECT * FROM PAX_info;

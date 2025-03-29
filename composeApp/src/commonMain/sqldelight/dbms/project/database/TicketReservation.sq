@@ -1,0 +1,26 @@
+-- 5. Ticket_reservation Table
+CREATE TABLE Ticket_reservation (
+    PNR_no TEXT PRIMARY KEY,
+    Train_code TEXT,
+    From_date TEXT, -- SQLite stores DATE as TEXT
+    To_date TEXT,   -- SQLite stores DATE as TEXT
+    From_Km REAL,
+    To_Km REAL,
+    From_Station TEXT,
+    To_Station TEXT,
+    Login_id TEXT,
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code),
+    FOREIGN KEY (From_Station) REFERENCES Station(Station_code),
+    FOREIGN KEY (To_Station) REFERENCES Station(Station_code),
+    FOREIGN KEY (Login_id) REFERENCES Login_credential(Login_id)
+);
+
+insert:
+INSERT INTO Ticket_reservation (PNR_no, Train_code, From_date, To_date, From_Km, To_Km, From_Station, To_Station, Login_id)
+VALUES (?,?,?,?,?,?,?,?,?);
+
+delete:
+DELETE FROM Ticket_reservation WHERE PNR_no = :pnr_no;
+
+read:
+SELECT * FROM Ticket_reservation;

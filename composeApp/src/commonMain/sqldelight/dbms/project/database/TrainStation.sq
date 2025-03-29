@@ -1,0 +1,21 @@
+-- 14. Train_Station Table (For N:M Relationship between Train and Station - "stops")
+CREATE TABLE Train_Station (
+    Train_code TEXT,
+    Station_code TEXT,
+    PRIMARY KEY (Train_code, Station_code),
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code),
+    FOREIGN KEY (Station_code) REFERENCES Station(Station_code)
+);
+
+insert:
+INSERT INTO Train_Station (Train_code, Station_code)
+VALUES (?,?);
+
+delete:
+DELETE FROM Train_Station WHERE Train_code = :train_code AND Station_code = :station_code;
+
+read:
+SELECT * FROM Train_Station;
+
+readWhere:
+SELECT * FROM Train_Station WHERE Train_code = :train_code ;

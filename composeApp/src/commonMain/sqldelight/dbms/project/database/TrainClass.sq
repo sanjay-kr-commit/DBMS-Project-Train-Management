@@ -1,0 +1,21 @@
+-- 13. Train_Class Table (For N:M Relationship between Train and Class)
+CREATE TABLE Train_Class (
+    Train_code TEXT,
+    Class_id TEXT,
+    PRIMARY KEY (Train_code, Class_id),
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code),
+    FOREIGN KEY (Class_id) REFERENCES Class(Class_id)
+);
+
+insert:
+INSERT INTO Train_Class (Train_code, Class_id)
+VALUES (?,?);
+
+delete:
+DELETE FROM Train_Class WHERE Train_code = :train_code AND Class_id = :class_id;
+
+read:
+SELECT * FROM Train_Class;
+
+readWhere:
+SELECT * FROM Train_Class WHERE Train_code = :train_code;

@@ -1,0 +1,24 @@
+-- 12. Via_details Table
+CREATE TABLE Via_details (
+    Train_code TEXT,
+    Via_station_code TEXT,
+    Via_station_name TEXT,
+    Reach_time TEXT, -- SQLite stores TIME as TEXT
+    Km_from_origin REAL,
+    PRIMARY KEY (Train_code, Via_station_code),
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code),
+    FOREIGN KEY (Via_station_code) REFERENCES Station(Station_code)
+);
+
+insert:
+INSERT INTO Via_details (Train_code, Via_station_code, Via_station_name, Reach_time, Km_from_origin)
+VALUES (?,?,?,?,?);
+
+delete:
+DELETE FROM Via_details WHERE Train_code = :train_code;
+
+read:
+SELECT * FROM Via_details;
+
+readWhere:
+SELECT * FROM Via_details WHERE Train_code = :train_code ;

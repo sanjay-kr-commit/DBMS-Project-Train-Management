@@ -1,0 +1,15 @@
+-- 4. Zone Table
+CREATE TABLE Zone (
+    Zone_id TEXT PRIMARY KEY,
+    Zone_name TEXT
+);
+
+insert:
+INSERT INTO Zone (Zone_id, Zone_name)
+VALUES (?,?);
+
+delete:
+DELETE FROM Zone WHERE Zone_id = :condition ;
+
+read:
+SELECT * FROM Zone;

@@ -1,0 +1,26 @@
+-- 10. Train_fare Table
+CREATE TABLE Train_fare (
+    Train_code TEXT,
+    Class_id TEXT,
+    From_Km REAL,
+    To_Km REAL,
+    From_Date TEXT, -- SQLite stores DATE as TEXT
+    To_Date TEXT,   -- SQLite stores DATE as TEXT
+    Fare REAL,
+    PRIMARY KEY (Train_code, Class_id, From_Km, To_Km, From_Date, To_Date),
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code),
+    FOREIGN KEY (Class_id) REFERENCES Class(Class_id)
+);
+
+insert:
+INSERT INTO Train_fare (Train_code, Class_id, From_Km, To_Km, From_Date, To_Date, Fare)
+VALUES (?,?,?,?,?,?,?);
+
+delete:
+DELETE FROM Train_fare WHERE Train_code = :train_code AND Class_id = :class_id;
+
+read:
+SELECT * FROM Train_fare;
+
+readWhere:
+SELECT * FROM Train_fare WHERE Train_code = :train_code AND Class_id = :class_id;

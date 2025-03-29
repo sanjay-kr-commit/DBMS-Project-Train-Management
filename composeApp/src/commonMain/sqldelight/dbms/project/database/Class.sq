@@ -1,0 +1,16 @@
+-- 3. Class Table
+CREATE TABLE Class (
+    Class_id TEXT PRIMARY KEY,
+    Class_code TEXT,
+    Seat_per_coach INTEGER
+);
+
+insert:
+INSERT INTO Class (Class_id, Class_code, Seat_per_coach)
+VALUES (?,?,?);
+
+read:
+SELECT * FROM Class;
+
+delete:
+DELETE FROM Class WHERE Class_id = :condition;

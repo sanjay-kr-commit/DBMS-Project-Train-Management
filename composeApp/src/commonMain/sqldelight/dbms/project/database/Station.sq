@@ -1,0 +1,21 @@
+-- 2. Station Table
+CREATE TABLE Station (
+    Station_code TEXT PRIMARY KEY,
+    Station_name TEXT,
+    Zone_id TEXT,
+    FOREIGN KEY (Zone_id) REFERENCES Zone(Zone_id)
+);
+
+insert:
+INSERT INTO Station (Station_code, Station_name, Zone_id)
+VALUES (?,?,?);
+
+read:
+SELECT * FROM Station;
+
+delete:
+DELETE FROM Station WHERE Station_code = :condition;
+
+deleteWithTrainCode:
+DELETE FROM Train WHERE Train_code = :condition;
+

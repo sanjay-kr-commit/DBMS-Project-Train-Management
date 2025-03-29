@@ -1,0 +1,18 @@
+-- 11. Seat_availability Table
+CREATE TABLE Seat_availability (
+    Train_code TEXT,
+    Details_id TEXT,
+    No_of_seats INTEGER,
+    PRIMARY KEY (Train_code, Details_id),
+    FOREIGN KEY (Train_code) REFERENCES Train(Train_code)
+);
+
+insert:
+INSERT INTO Seat_availability (Train_code, Details_id, No_of_seats)
+VALUES (?,?,?);
+
+delete:
+DELETE FROM Seat_availability WHERE Train_code = :train_code;
+
+read:
+SELECT * FROM Seat_availability;

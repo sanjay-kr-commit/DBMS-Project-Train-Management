@@ -1,0 +1,18 @@
+-- 8. Refund_rule Table
+CREATE TABLE Refund_rule (
+    From_time TEXT, -- SQLite stores TIME as TEXT
+    To_time TEXT,   -- SQLite stores TIME as TEXT
+    Refundable_amt REAL,
+    Login_id TEXT,
+    FOREIGN KEY (Login_id) REFERENCES Login_credential(Login_id)
+);
+
+insert:
+INSERT INTO Refund_rule (From_time, To_time, Refundable_amt, Login_id)
+VALUES (?,?,?,?);
+
+delete:
+DELETE FROM Refund_rule WHERE Login_id = :login_id;
+
+read:
+SELECT * FROM Refund_rule;

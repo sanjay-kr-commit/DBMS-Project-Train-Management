@@ -1,0 +1,21 @@
+-- 9. Pay_info Table
+CREATE TABLE Pay_info (
+    Payment_id TEXT PRIMARY KEY,
+    Inst_type TEXT,
+    Inst_amt REAL,
+    Pay_mode TEXT,
+    Amount REAL,
+    Pay_date TEXT, -- SQLite stores DATE as TEXT
+    PNR_no TEXT,
+    FOREIGN KEY (PNR_no) REFERENCES Ticket_reservation(PNR_no)
+);
+
+insert:
+INSERT INTO Pay_info (Payment_id, Inst_type, Inst_amt, Pay_mode, Amount, Pay_date, PNR_no)
+VALUES (?,?,?,?,?,?,?);
+
+delete:
+DELETE FROM Pay_info WHERE PNR_no = :pnr_no;
+
+read:
+SELECT * FROM Pay_info;

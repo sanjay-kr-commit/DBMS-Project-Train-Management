@@ -1,0 +1,24 @@
+-- 1. Train Table
+CREATE TABLE Train (
+    Train_code TEXT PRIMARY KEY,
+    Train_name TEXT,
+    Distance REAL,
+    Frequency TEXT,
+    Start_station_code TEXT,
+    End_station_code TEXT,
+    Start_time TEXT, -- SQLite stores TIME as TEXT
+    End_time TEXT  -- SQLite stores TIME as TEXT
+);
+
+insert:
+INSERT INTO Train (Train_code, Train_name, Distance, Frequency, Start_station_code, End_station_code, Start_time, End_time)
+VALUES (?,?,?,?,?,?,?,?);
+
+select:
+SELECT * FROM Train;
+
+selectWithWhere:
+SELECT * FROM Train WHERE Train_code = :condition; -- Select specific record
+
+delete:
+DELETE FROM Train WHERE Train_code = :condition;
