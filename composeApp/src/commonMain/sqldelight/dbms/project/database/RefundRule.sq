@@ -1,5 +1,5 @@
 -- 8. Refund_rule Table
-CREATE TABLE Refund_rule (
+CREATE TABLE IF NOT EXISTS Refund_rule (
     From_time TEXT, -- SQLite stores TIME as TEXT
     To_time TEXT,   -- SQLite stores TIME as TEXT
     Refundable_amt REAL,

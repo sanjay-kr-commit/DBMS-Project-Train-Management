@@ -2,22 +2,38 @@ package dbms.project
 
 import androidx.compose.runtime.Composable
 import dbms.project.navigation.CreateScreenCatalog
-import dbms.project.navigation.NavigationController
 import dbms.project.navigation.Screen
+import dbms.project.screen.LoginOrRegisterScreen
 import dbms.project.screen.MainScreen
-
-data class Context(
-    val screen: String = "" ,
-)
+import dbms.project.screen.UserList
 
 @Composable
 fun Navigator(
-    navigationController: NavigationController ,
-    contextObj : Context = Context()
+    context : Context = Context()
 ) = CreateScreenCatalog(
-    navigationController = navigationController
+    navigationController = context.navigationController,
 ) {
+
     Screen( Screen.MainScreen ) {
-        MainScreen()
+        MainScreen(context)
     }
+
+    Screen( Screen.LoginScreen ) {
+        LoginOrRegisterScreen(
+            context ,
+            login = true
+        )
+    }
+
+    Screen( Screen.RegisterScreen ) {
+        LoginOrRegisterScreen(
+            context ,
+            login = false
+        )
+    }
+
+    Screen( Screen.UserListScreen ) {
+        UserList(context)
+    }
+
 }

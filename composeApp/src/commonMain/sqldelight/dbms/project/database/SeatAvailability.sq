@@ -1,5 +1,5 @@
 -- 11. Seat_availability Table
-CREATE TABLE Seat_availability (
+CREATE TABLE IF NOT EXISTS Seat_availability (
     Train_code TEXT,
     Details_id TEXT,
     No_of_seats INTEGER,

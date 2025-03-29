@@ -1,5 +1,5 @@
 -- 6. PAX_info Table
-CREATE TABLE PAX_info (
+CREATE TABLE IF NOT EXISTS PAX_info (
     SRL_no INTEGER PRIMARY KEY, -- SQLite uses INTEGER PRIMARY KEY AUTOINCREMENT for auto-increment
     PAX_name TEXT,
     PAX_age INTEGER,

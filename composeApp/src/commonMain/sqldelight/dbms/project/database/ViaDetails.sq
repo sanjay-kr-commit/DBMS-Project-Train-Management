@@ -1,5 +1,5 @@
 -- 12. Via_details Table
-CREATE TABLE Via_details (
+CREATE TABLE IF NOT EXISTS Via_details (
     Train_code TEXT,
     Via_station_code TEXT,
     Via_station_name TEXT,

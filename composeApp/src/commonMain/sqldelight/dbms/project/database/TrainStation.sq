@@ -1,5 +1,5 @@
 -- 14. Train_Station Table (For N:M Relationship between Train and Station - "stops")
-CREATE TABLE Train_Station (
+CREATE TABLE IF NOT EXISTS Train_Station (
     Train_code TEXT,
     Station_code TEXT,
     PRIMARY KEY (Train_code, Station_code),

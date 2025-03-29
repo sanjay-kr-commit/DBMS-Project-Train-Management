@@ -1,5 +1,5 @@
 -- 13. Train_Class Table (For N:M Relationship between Train and Class)
-CREATE TABLE Train_Class (
+CREATE TABLE IF NOT EXISTS Train_Class (
     Train_code TEXT,
     Class_id TEXT,
     PRIMARY KEY (Train_code, Class_id),

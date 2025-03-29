@@ -1,5 +1,5 @@
 -- 4. Zone Table
-CREATE TABLE Zone (
+CREATE TABLE IF NOT EXISTS Zone (
     Zone_id TEXT PRIMARY KEY,
     Zone_name TEXT
 );

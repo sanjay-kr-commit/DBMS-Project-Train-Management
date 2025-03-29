@@ -1,5 +1,5 @@
 -- 9. Pay_info Table
-CREATE TABLE Pay_info (
+CREATE TABLE IF NOT EXISTS Pay_info (
     Payment_id TEXT PRIMARY KEY,
     Inst_type TEXT,
     Inst_amt REAL,

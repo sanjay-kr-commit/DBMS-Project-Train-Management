@@ -1,5 +1,5 @@
 -- 3. Class Table
-CREATE TABLE Class (
+CREATE TABLE IF NOT EXISTS Class (
     Class_id TEXT PRIMARY KEY,
     Class_code TEXT,
     Seat_per_coach INTEGER

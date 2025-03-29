@@ -1,5 +1,5 @@
 -- 5. Ticket_reservation Table
-CREATE TABLE Ticket_reservation (
+CREATE TABLE IF NOT EXISTS Ticket_reservation (
     PNR_no TEXT PRIMARY KEY,
     Train_code TEXT,
     From_date TEXT, -- SQLite stores DATE as TEXT

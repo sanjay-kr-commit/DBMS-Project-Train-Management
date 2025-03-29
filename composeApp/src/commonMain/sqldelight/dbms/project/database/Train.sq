@@ -1,5 +1,5 @@
 -- 1. Train Table
-CREATE TABLE Train (
+CREATE TABLE IF NOT EXISTS Train (
     Train_code TEXT PRIMARY KEY,
     Train_name TEXT,
     Distance REAL,

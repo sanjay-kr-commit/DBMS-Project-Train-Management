@@ -1,5 +1,5 @@
 -- 2. Station Table
-CREATE TABLE Station (
+CREATE TABLE IF NOT EXISTS Station (
     Station_code TEXT PRIMARY KEY,
     Station_name TEXT,
     Zone_id TEXT,

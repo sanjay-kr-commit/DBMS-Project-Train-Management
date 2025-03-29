@@ -1,5 +1,5 @@
 -- 10. Train_fare Table
-CREATE TABLE Train_fare (
+CREATE TABLE IF NOT EXISTS Train_fare (
     Train_code TEXT,
     Class_id TEXT,
     From_Km REAL,
