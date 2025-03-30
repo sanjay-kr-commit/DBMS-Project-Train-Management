@@ -20,7 +20,8 @@ fun UserList(
     context : Context
 ) {
     val userList = remember { context.trainDatabase.loginCredentialQueries.read().executeAsList() }
-    Box( modifier = Modifier.fillMaxSize() , contentAlignment = Alignment.Center ) {
+    Box( modifier = Modifier.fillMaxSize().padding( top = 70.dp )
+        .padding( start = 25.dp ) , contentAlignment = Alignment.TopStart ) {
         LazyColumn {
             userList.forEach { ( name , _ ) ->
                 item {
