@@ -1,6 +1,8 @@
 package dbms.project.screen
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,12 +11,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import dbms.project.Context
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
@@ -51,19 +50,12 @@ fun TicketRegistration(
     DisposableEffect(null) {
         onDispose {
             println( "Exited $activeIndex : ${listOfScreens.size}" )
-            if ( activeIndex < listOfScreens.size-1 ) {
-                println( "Ticket Registration Cancelled" )
-                GlobalScope.launch {
-                    processTransaction.forEach {
-                        it.invoke(context)
-                    }
-                }
-            }
         }
     }
 }
 
-private val listOfScreens : List<@Composable (context:Context,nextButton:()->Unit,prevButton:()->Unit,dataStore : MutableList<Pair<String,MutableState<String>>>) -> Unit> = listOf(
+@OptIn(DelicateCoroutinesApi::class)
+private val listOfScreens : List<@Composable (context:Context, nextButton:()->Unit, prevButton:()->Unit, dataStore : MutableList<Pair<String,MutableState<String>>>) -> Unit> = listOf(
     // Train
     { context , nextButton , prevButton , dataStore ->
         generic(context,nextButton,prevButton,dataStore, showPrevButton = false , entries = listOf(
@@ -157,17 +149,29 @@ private val listOfScreens : List<@Composable (context:Context,nextButton:()->Uni
     } ,
     // End Page
     { context , _ , prevButton , _ ->
+        var job : Job? by remember { mutableStateOf(null) }
         Box( Modifier.fillMaxSize() , contentAlignment = Alignment.Center ) {
             Column {
-                Button( {
-                    context.navigationController.back()
-                } ) {
-                    Text( "Ticket Registration Complete" )
-                }
-                Button( {
-                    prevButton()
-                } ) {
-                    Text( "Prev" )
+                job?.run {
+                    CircularProgressIndicator()
+                } ?: run {
+                    Button({
+                        job = GlobalScope.launch {
+                            processTransaction.forEach {
+                                it.invoke(context)
+                            }
+                            delay(2000)
+                            job = null
+                            context.navigationController.back()
+                        }
+                    }) {
+                        Text("Submit Ticket")
+                    }
+                    Button({
+                        prevButton()
+                    }) {
+                        Text("Prev")
+                    }
                 }
             }
         }
@@ -175,11 +179,75 @@ private val listOfScreens : List<@Composable (context:Context,nextButton:()->Uni
 )
 
 private val processTransaction : List<(context:Context)->Unit> = listOf(
+    // Train
     {
-
+        println( "Processing Train" )
+        println( "Transaction Complete" )
+    },
+    // Zone Id
+    {
+        println( "Processing Zone id" )
+        println( "Transaction Complete" )
     } ,
+    // Station From
     {
-
+        println( "Processing Station From" )
+        println( "Transaction Complete" )
+    } ,
+    // Station To
+    {
+        println( "Processing Station to" )
+        println( "Transaction Complete" )
+    } ,
+    // Class
+    {
+        println( "Processing Class" )
+        println( "Transaction Complete" )
+    } ,
+    // Ticket Reservation
+    {
+        println( "Processing Ticket Reservation" )
+        println( "Transaction Complete" )
+    } ,
+    // Pax Info
+    {
+        println( "Processing Pax Info" )
+        println( "Transaction Complete" )
+    } ,
+    // Refund Rule
+    {
+        println( "Processing Refund Rule" )
+        println( "Transaction Complete" )
+    } ,
+    // Pay Info
+    {
+        println( "Processing Pay Info" )
+        println( "Transaction Complete" )
+    } ,
+    // Train Fare
+    {
+        println( "Processing Train Fare" )
+        println( "Transaction Complete" )
+    } ,
+    // Seat Availability
+    {
+        println( "Processing Seat Availability" )
+        println( "Transaction Complete" )
+    } ,
+    // Via Details
+    {
+        println( "Processing Via Details" )
+        println( "Transaction Complete" )
+    } ,
+    // Train Class
+    {
+        println( "Processing Train Class" )
+        println( "Transaction Complete" )
+    } ,
+    // Train Station
+    {
+        println( "Processing Train Station" )
+        println( "Transaction Complete" )
     }
 )
 
