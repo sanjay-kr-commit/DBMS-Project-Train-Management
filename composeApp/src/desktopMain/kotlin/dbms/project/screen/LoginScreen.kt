@@ -13,13 +13,6 @@ import androidx.compose.ui.unit.dp
 import dbms.project.Context
 import kotlinx.coroutines.*
 
-private fun listOfUser(context: Context) = HashMap<String,String>().apply {
-    context.trainDatabase.loginCredentialQueries.read().executeAsList()
-        .forEach { (name,password) ->
-            put(name,password!!)
-        }
-}
-
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun LoginOrRegisterScreen(
@@ -27,7 +20,6 @@ fun LoginOrRegisterScreen(
     login : Boolean
 ) {
 
-    val userList = remember { listOfUser(context) }
     var loginId by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var message by remember { mutableStateOf("") }
@@ -53,22 +45,26 @@ fun LoginOrRegisterScreen(
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 if ( login ) Button(onClick = {
+                    message = "Looking got account"
+                    val user = context.trainDatabase.loginCredentialQueries.findUser(
+                        loginId
+                    ).executeAsOneOrNull()
                     when {
-                        !userList.containsKey(loginId) -> {
+                        user == null -> {
                             message = "User Does not exist"
                             GlobalScope.launch {
                                 delay(2000)
                                 message = ""
                             }
                         }
-                        userList.containsKey(loginId) && userList[loginId] != password -> {
+                        user.Login_id == loginId && user.Password != password -> {
                             message = "Wrong password"
                             GlobalScope.launch {
                                 delay(2000)
                                 message = "Wrong password"
                             }
                         }
-                        userList.containsKey(loginId) && userList[loginId] == password -> {
+                        user.Login_id == loginId && user.Password == password -> {
                             message = "Credentials Matched"
                             context.loginId = loginId.trim()
                             context.password = password
@@ -96,7 +92,7 @@ fun LoginOrRegisterScreen(
                                 message = ""
                             }
                         }
-                        userList.containsKey(loginId.trim()) -> {
+                        context.trainDatabase.loginCredentialQueries.findUser(loginId.trim()).executeAsOneOrNull() != null -> {
                             message = "User Already exists"
                             GlobalScope.launch {
                                 delay(2000)
