@@ -46,7 +46,7 @@ fun Navigator(
     }
 
     Screen( Screen.HomeScreen ) {
-        LogoutButton(
+        BackButton(
             context = context,
             buttonText = "Logout",
             content = {
@@ -56,7 +56,7 @@ fun Navigator(
     }
 
     Screen( Screen.TicketList ) {
-        LogoutButton(
+        BackButton(
             context = context,
             buttonText = "Back",
             content = {
@@ -66,7 +66,7 @@ fun Navigator(
     }
 
     Screen( Screen.RegisterTicket ) {
-        LogoutButton(
+        BackButton(
             context = context,
             buttonText = "Back",
             content = {
@@ -78,7 +78,7 @@ fun Navigator(
 }
 
 @Composable
-private fun LogoutButton(
+private fun BackButton(
     content : @Composable () -> Unit ,
     context: Context ,
     buttonText: String
