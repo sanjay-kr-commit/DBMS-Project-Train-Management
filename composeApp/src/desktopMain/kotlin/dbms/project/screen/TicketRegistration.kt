@@ -1,8 +1,6 @@
 package dbms.project.screen
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import dbms.project.Context
 import kotlinx.coroutines.*
 
-@OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun TicketRegistration(
     context : Context
@@ -26,8 +23,8 @@ fun TicketRegistration(
     Box( Modifier.fillMaxSize() , contentAlignment = Alignment.Center ) {
         listOfScreens.forEachIndexed { index, screen ->
             AnimatedVisibility( activeIndex == index ,
-                enter = if ( previousIndex < activeIndex ) slideInHorizontally( initialOffsetX = { it * 2 } ) else slideInHorizontally( initialOffsetX = { -it }) ,
-                exit = if ( previousIndex < activeIndex ) slideOutHorizontally( targetOffsetX = { -it }) else slideOutHorizontally( targetOffsetX = { it * 2 }) ,
+                enter = fadeIn() + if ( previousIndex < activeIndex ) slideInHorizontally( initialOffsetX = { it * 2 } ) else slideInHorizontally( initialOffsetX = { -it }) ,
+                exit = fadeOut() + if ( previousIndex < activeIndex ) slideOutHorizontally( targetOffsetX = { -it }) else slideOutHorizontally( targetOffsetX = { it * 2 }) ,
             ) {
                 screen(context, {
                     previousIndex = activeIndex++
