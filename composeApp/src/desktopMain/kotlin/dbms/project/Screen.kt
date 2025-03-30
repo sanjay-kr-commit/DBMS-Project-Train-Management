@@ -5,7 +5,9 @@ enum class Screen {
     LoginScreen ,
     RegisterScreen ,
     UserListScreen ,
-    HomeScreen
+    HomeScreen ,
+    TicketList ,
+    RegisterTicket ,
     ;
 
     override fun toString(): String = name

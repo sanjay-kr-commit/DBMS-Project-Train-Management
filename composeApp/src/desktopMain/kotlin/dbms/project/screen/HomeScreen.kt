@@ -22,10 +22,10 @@ fun HomeScreen(
         Column ( Modifier.wrapContentSize(), Arrangement.Center , Alignment.CenterHorizontally ) {
             listOf(
                 "Ticket List" to {
-                    context.navigationController.navigateTo( Screen.LoginScreen )
+                    context.navigationController.navigateTo( Screen.TicketList )
                 } ,
                 "Register Ticket" to {
-                    context.navigationController.navigateTo( Screen.RegisterScreen )
+                    context.navigationController.navigateTo( Screen.RegisterTicket )
                 }
             ).forEach { ( name , func ) ->
                     Box( Modifier

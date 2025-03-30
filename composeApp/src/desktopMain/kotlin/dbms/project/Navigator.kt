@@ -14,10 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dbms.project.navigation.CreateScreenCatalog
 import dbms.project.navigation.Screen
-import dbms.project.screen.HomeScreen
-import dbms.project.screen.LoginOrRegisterScreen
-import dbms.project.screen.MainScreen
-import dbms.project.screen.UserList
+import dbms.project.screen.*
 
 @Composable
 fun Navigator(
@@ -51,8 +48,29 @@ fun Navigator(
     Screen( Screen.HomeScreen ) {
         LogoutButton(
             context = context,
+            buttonText = "Logout",
             content = {
                 HomeScreen(context)
+            }
+        )
+    }
+
+    Screen( Screen.TicketList ) {
+        LogoutButton(
+            context = context,
+            buttonText = "Back",
+            content = {
+                TicketList(context)
+            }
+        )
+    }
+
+    Screen( Screen.RegisterTicket ) {
+        LogoutButton(
+            context = context,
+            buttonText = "Back",
+            content = {
+                TicketRegistration(context)
             }
         )
     }
@@ -62,7 +80,8 @@ fun Navigator(
 @Composable
 private fun LogoutButton(
     content : @Composable () -> Unit ,
-    context: Context
+    context: Context ,
+    buttonText: String
 ) {
     Scaffold (
         topBar = {
@@ -77,7 +96,7 @@ private fun LogoutButton(
                     }) ,
                     contentAlignment = Alignment.Center
                 ) {
-                    Text( "Logout" ,color = MaterialTheme.colors.onPrimary)
+                    Text( buttonText ,color = MaterialTheme.colors.onPrimary)
                 }
                 Spacer( Modifier.height(30.dp) )
             }
