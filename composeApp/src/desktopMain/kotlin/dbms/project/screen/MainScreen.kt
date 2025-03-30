@@ -29,10 +29,12 @@ fun MainScreen(
                 context.navigationController.navigateTo( Screen.RegisterScreen )
             },  "User List" to {
                 context.navigationController.navigateTo( Screen.UserListScreen )
+            }, "ER Diagram" to {
+                context.navigationController.navigateTo( Screen.ERDiagramScreen )
             } )
                 .forEach { ( name , func ) ->
                     Box( Modifier
-                        .width(100.dp)
+                        .width(115.dp)
                         .clip(RoundedCornerShape(5.dp))
                         .background(MaterialTheme.colors.primary)
                         .padding(5.dp)

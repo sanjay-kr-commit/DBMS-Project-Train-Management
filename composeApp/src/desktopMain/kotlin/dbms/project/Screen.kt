@@ -2,6 +2,7 @@ package dbms.project
 
 enum class Screen {
     MainScreen ,
+    ERDiagramScreen ,
     LoginScreen ,
     RegisterScreen ,
     UserListScreen ,

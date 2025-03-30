@@ -45,6 +45,18 @@ fun Navigator(
         UserList(context)
     }
 
+    Screen( Screen.ERDiagramScreen ) {
+        BackButton(
+            context = context,
+            buttonText = "Back",
+            content = {
+                ERDiagramScreen(
+                    context.isDarkTheme
+                )
+            }
+        )
+    }
+
     Screen( Screen.HomeScreen ) {
         BackButton(
             context = context,
@@ -101,7 +113,7 @@ private fun BackButton(
                 Spacer( Modifier.height(30.dp) )
             }
         }
-    ) {
-        Box(Modifier.fillMaxSize().padding(it) , content = {content()} )
+    ) { scaffoldPadding ->
+        Box(Modifier.fillMaxSize().padding(scaffoldPadding), content = {content()} )
     }
 }
