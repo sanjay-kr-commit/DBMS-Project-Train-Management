@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dbms.project.Context
+import dbms.project.Screen
 import kotlinx.coroutines.*
 
 @OptIn(DelicateCoroutinesApi::class)
@@ -68,10 +69,7 @@ fun LoginOrRegisterScreen(
                             message = "Credentials Matched"
                             context.loginId = loginId.trim()
                             context.password = password
-                            GlobalScope.launch {
-                                delay(2000)
-                                message = ""
-                            }
+                            context.navigationController.navigateTo(Screen.HomeScreen)
                         }
                     }
                 }, modifier = Modifier.wrapContentSize()) {
@@ -114,19 +112,21 @@ fun LoginOrRegisterScreen(
                             }
                         }
                         else -> {
-                            context.loginId = loginId.trim()
-                            context.password = password
                             try {
                                 context.trainDatabase.loginCredentialQueries.insert(
                                     loginId.trim(),password
                                 )
+                                context.loginId = loginId.trim()
+                                context.password = password
+                                context.navigationController.navigateTo(Screen.HomeScreen)
                                 message = "Done"
                             } catch ( _ : Exception ) {
                                 message = "Something went wrong"
-                            }
-                            GlobalScope.launch {
-                                delay(2000)
-                                message = ""
+                            } finally {
+                                GlobalScope.launch {
+                                    delay(2000)
+                                    message = ""
+                                }
                             }
                         }
                     }

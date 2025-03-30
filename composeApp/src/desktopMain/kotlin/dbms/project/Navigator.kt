@@ -3,6 +3,7 @@ package dbms.project
 import androidx.compose.runtime.Composable
 import dbms.project.navigation.CreateScreenCatalog
 import dbms.project.navigation.Screen
+import dbms.project.screen.HomeScreen
 import dbms.project.screen.LoginOrRegisterScreen
 import dbms.project.screen.MainScreen
 import dbms.project.screen.UserList
@@ -34,6 +35,10 @@ fun Navigator(
 
     Screen( Screen.UserListScreen ) {
         UserList(context)
+    }
+
+    Screen( Screen.HomeScreen ) {
+        HomeScreen(context)
     }
 
 }
