@@ -12,7 +12,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dbms.project.Context
 import dbms.project.Screen
-import kotlinx.coroutines.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
@@ -67,14 +70,14 @@ fun LoginOrRegisterScreen(
                         }
                         user.Login_id == loginId && user.Password == password -> {
                             message = "Credentials Matched"
-                            context.loginId = loginId.trim()
-                            context.password = password
+                            context.loginCredential = user
                             context.navigationController.navigateTo(Screen.HomeScreen)
                         }
                     }
                 }, modifier = Modifier.wrapContentSize()) {
                     Text("Login")
                 } else Button(onClick = {
+                    val user = context.trainDatabase.loginCredentialQueries.findUser(loginId.trim()).executeAsOneOrNull()
                     when {
                         loginId.isEmpty() -> {
                             message = "Login Id is Empty"
@@ -90,7 +93,7 @@ fun LoginOrRegisterScreen(
                                 message = ""
                             }
                         }
-                        context.trainDatabase.loginCredentialQueries.findUser(loginId.trim()).executeAsOneOrNull() != null -> {
+                        user != null -> {
                             message = "User Already exists"
                             GlobalScope.launch {
                                 delay(2000)
@@ -116,8 +119,7 @@ fun LoginOrRegisterScreen(
                                 context.trainDatabase.loginCredentialQueries.insert(
                                     loginId.trim(),password
                                 )
-                                context.loginId = loginId.trim()
-                                context.password = password
+                                context.loginCredential = context.trainDatabase.loginCredentialQueries.findUser(loginId.trim()).executeAsOneOrNull()
                                 context.navigationController.navigateTo(Screen.HomeScreen)
                                 message = "Done"
                             } catch ( _ : Exception ) {
