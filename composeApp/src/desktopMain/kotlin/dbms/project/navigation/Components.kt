@@ -1,5 +1,8 @@
 package dbms.project.navigation
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -48,5 +51,7 @@ fun NavigationHost.NavigationGraphBuilder.Screen(
     route: Screen,
     content: @Composable () -> Unit
 ) {
-    if (navigationController.currentScreen == route) content()
+    AnimatedVisibility( navigationController.currentScreen == route ,
+        enter = fadeIn() , exit = fadeOut()
+        , content = {content()} )
 }
