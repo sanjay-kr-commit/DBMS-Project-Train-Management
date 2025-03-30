@@ -13,16 +13,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import dbms.project.Context
 import dbms.project.Screen
-import dbms.project.navigation.navController
 
 @Composable
 fun MainScreen(
     context: Context
 ) {
+    Box( Modifier.fillMaxSize().padding( 50.dp ) , contentAlignment = Alignment.TopCenter ) {
+        Text( "Welcome to Train Management" , color = MaterialTheme.colors.onSurface )
+    }
     Box( Modifier.fillMaxSize() , contentAlignment = Alignment.Center ) {
         Column ( Modifier.wrapContentSize(), Arrangement.Center , Alignment.CenterHorizontally ) {
-            Text( "Welcome to Train Management" , color = MaterialTheme.colors.onSurface )
-            Spacer(modifier = Modifier.height(200.dp))
             listOf( "Login" to {
                 context.navigationController.navigateTo( Screen.LoginScreen )
             } , "Register" to {
